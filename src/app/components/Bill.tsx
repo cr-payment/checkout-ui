@@ -19,16 +19,48 @@ export const InfoLine = ({ label, value }) => {
     </Box>
   );
 };
+
+export const ImageAndText = ({ imgPath, label, value }) => {
+  return (
+    <Box display="flex" alignItems="center">
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <img
+          src={imgPath}
+          width="50px"
+          height="50px"
+          style={{ marginRight: '50px' }}
+        />
+        <Typography variant="body1">{label}</Typography>
+      </div>
+      <Box flexGrow={1} mx={2}></Box>
+      <Typography variant="body1" style={{ fontWeight: 'bold' }}>
+        {`$ ${value}`}
+      </Typography>
+    </Box>
+  );
+};
 const Cart = ({ billInfo }) => {
   return (
     <div>
-      {billInfo?.cart.map((bill: { name: string; price: number }, index) => (
-        <InfoLine key={index} label={bill.name} value={bill.price} />
-      ))}
-      <Box flexGrow={15} borderBottom="1px solid #ccc" mx={2} my={4}></Box>
+      {billInfo?.cart.map(
+        (bill: { name: string; price: number; img: string }, index) => (
+          <>
+            <Box flexGrow={15} mx={2} my={2}></Box>
 
-      <InfoLine label="Shipping" value={billInfo?.shipping} />
-      <InfoLine label="Total" value={billInfo?.total} />
+            <ImageAndText
+              key={index}
+              imgPath={bill.img}
+              label={bill.name}
+              value={bill.price}
+            />
+          </>
+        ),
+      )}
+      <Box flexGrow={15} borderBottom="1px solid #ccc" my={4}></Box>
+
+      <InfoLine label="Shipping" value={`$ ${billInfo?.shipping}`} />
+      <InfoLine label="Total" value={`$ ${billInfo?.total}`} />
+      {/* TODO paid in ... tokens */}
     </div>
   );
 };
@@ -55,8 +87,18 @@ export default function Bill() {
       <Grid container spacing={10}>
         <Grid item xs={6}>
           <Typography variant="h5">Pay to {billInfo?.shopName}</Typography>
-          <Typography variant="h3">${billInfo?.total}</Typography>
-          <Typography variant="h6">Cart</Typography>
+
+          <Box display="flex" alignItems="center">
+            <Typography variant="h3">$ {billInfo?.total}</Typography>
+            <Box flexGrow={1} mx={2}></Box>
+            <img
+              src="logo.jpg"
+              width="150"
+              className="me-2"
+              style={{ border: '2px solid #000' }}
+            />
+          </Box>
+          <Typography variant="h5">Cart</Typography>
           <Cart billInfo={billInfo} />
         </Grid>
         <Grid item xs={6}>
@@ -64,7 +106,7 @@ export default function Bill() {
           <InfoLine label="Name" value={billInfo?.name} />
           <InfoLine label="Email" value={billInfo?.email} />
           <InfoLine label="Number" value={billInfo?.number} />
-          <Box flexGrow={15} borderBottom="1px solid #ccc" mx={2} my={4}></Box>
+          <Box flexGrow={15} borderBottom="1px solid #ccc" my={4}></Box>
           <Pay billInfo={billInfo} />
         </Grid>
       </Grid>

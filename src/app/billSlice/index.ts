@@ -10,11 +10,11 @@ import { stat } from 'fs';
 export const initialState: BillState = {
   loading: false,
   billData: {
-    name: 'Lalala',
-    email: 'myemail@gmail.com',
+    name: 'Lala Land',
+    email: ' @gmail.com',
     number: '0987654321',
     shopId: '123',
-    shopName: 'MyShop',
+    shopName: 'BestStyle Shop',
     cart: [],
     shipping: 0,
     total: 0,
