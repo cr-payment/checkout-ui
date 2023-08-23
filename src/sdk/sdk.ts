@@ -1,10 +1,10 @@
-import {Session} from "./modules";
-import {Config} from "./interfaces";
+import { Session } from './modules';
+import { Config } from './interfaces';
 
 export class CrPayment {
-    session: Session;
+  session: Session;
 
-    constructor(options: Config) {
-        this.session = new Session(options.network, options);
-    }
+  constructor(options: Config) {
+    this.session = new Session(options.network, options);
+  }
 }

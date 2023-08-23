@@ -15,8 +15,7 @@ export const initialState: BillState = {
     number: '0987654321',
     shopId: '123',
     shopName: 'MyShop',
-    cart: [
-    ],
+    cart: [],
     shipping: 0,
     total: 0,
     paidIn: 0,

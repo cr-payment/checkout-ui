@@ -9,7 +9,6 @@ const ChooseToken = () => (
   </Box>
 );
 
-
 const Pay = ({ billInfo }) => {
   const [openChooseToken, setOpenChooseToken] = useState(false);
   const [openConnectWallet, setOpenConnectWallet] = useState(false);

@@ -12,6 +12,7 @@ import Bill from './components/Bill';
 import {
   Box,
   Button,
+  CssBaseline,
   Grid,
   ThemeProvider,
   createTheme,
@@ -39,6 +40,7 @@ const config = createConfig({
 });
 
 const theme = createTheme({
+  palette: { mode: 'light' },
   typography: {
     fontFamily: [
       'Roboto',
@@ -54,7 +56,7 @@ const theme = createTheme({
 });
 
 export function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { actions } = useBillSlice();
   const billInfo = useSelector(selectBillData);
 
@@ -67,26 +69,26 @@ export function App() {
 
     // Read the 'param' query parameter from the URL
     const sessId = getQueryParam('session_id');
-    const jsonDataURI= getQueryParam('json_data');
-    console.log(jsonDataURI)
+    const jsonDataURI = getQueryParam('json_data');
+    console.log(jsonDataURI);
     const jsonData = JSON.parse(decodeURIComponent(jsonDataURI!));
-    console.log(jsonData)
+    console.log(jsonData);
     const shipping = getQueryParam('shipping')!;
     const total = getQueryParam('total')!;
     const merchantAddress = getQueryParam('merchant_address')!;
-    console.log(merchantAddress)
+    console.log(merchantAddress);
 
     if (sessId) {
-      dispatch(actions.billRequestSuccess(
-        {
+      dispatch(
+        actions.billRequestSuccess({
           ...billInfo,
           cart: jsonData,
           shipping: parseFloat(shipping),
           total: parseFloat(total),
           sessionId: parseInt(sessId),
           merchantAddress: merchantAddress,
-        }
-      ))
+        }),
+      );
 
       localStorage.setItem('session_id ', sessId);
       console.log(jsonData);
@@ -107,6 +109,7 @@ export function App() {
     <WagmiConfig config={config}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
+        <CssBaseline />
         <Box
           sx={{
             height: 100,

@@ -1,5 +1,12 @@
 import { Box, Typography } from '@mui/material';
-import { useAccount, useConnect, useContractRead, useContractWrite, useEnsName, usePrepareContractWrite } from 'wagmi';
+import {
+  useAccount,
+  useConnect,
+  useContractRead,
+  useContractWrite,
+  useEnsName,
+  usePrepareContractWrite,
+} from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import contractABI from './contractABI.json';
 import { useBillSlice } from 'app/billSlice';
@@ -20,28 +27,27 @@ function Profile() {
 const ConnectWallet = () => {
   const { actions } = useBillSlice();
   const billInfo = useSelector(selectBillData);
-//   const abi = contractABI as const // <--- const assertion
-// const { data } = useContractRead({ abi })
+  //   const abi = contractABI as const // <--- const assertion
+  // const { data } = useContractRead({ abi })
 
-const sessionId = billInfo!.sessionId;
-const merchantAddress = billInfo!.merchantAddress;
-const token = `0x${process.env.REACT_APP_TOKEN!}`;
-const total = billInfo!.total;
-const totalRounded= Math.round(total);
+  const sessionId = billInfo!.sessionId;
+  const merchantAddress = billInfo!.merchantAddress;
+  const token = `0x${process.env.REACT_APP_TOKEN!}`;
+  const total = billInfo!.total;
+  const totalRounded = Math.round(total);
 
   const { config } = usePrepareContractWrite({
-        address: `0x${process.env.REACT_APP_CONTRACT_ADDRESS!}`,
+    address: `0x${process.env.REACT_APP_CONTRACT_ADDRESS}`,
     abi: contractABI as any[],
     functionName: 'pay',
     args: [
       sessionId,
       merchantAddress,
-      `0x${process.env.REACT_APP_TOKEN!}`,
+      `0x${process.env.REACT_APP_TOKEN}`,
       totalRounded,
     ],
-  })
-  const { data, isLoading, isSuccess, write } = useContractWrite(config)
-
+  });
+  const { data, isLoading, isSuccess, write } = useContractWrite(config);
 
   return (
     <Box sx={{ bgcolor: 'primary.main', color: 'primary.contrastText' }}>
