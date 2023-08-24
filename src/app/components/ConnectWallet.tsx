@@ -24,12 +24,11 @@ function Profile() {
   return (
     <>
       <Wallets handleClick={connect} />
-      {/* {isConnected && <Typography variant="body1">Connected to {ensName ?? address}</Typography>} */}
-      {isConnected && (
+      {/* {isConnected && (
         <Typography variant="body1">
           Connected to {ensName ?? address}
         </Typography>
-      )}
+      )} */}
     </>
   );
 }
@@ -77,20 +76,16 @@ const ConnectWallet = () => {
   return (
     <>
       <Box flexGrow={15} borderBottom="1px solid #ccc" my={4}></Box>
-
       <Typography variant="h5">Connect your wallet</Typography>
       <Box flexGrow={15} mx={2} my={2}></Box>
-
       <Wallets handleClick={connect} />
-
       <Box flexGrow={15} mx={2} my={2}></Box>
-
       <Grid container spacing={40}>
         <Grid item md={1}>
           <Button
             sx={{
               height: 60,
-              width: 200,
+              width: 250,
               backgroundColor: '#FAC898',
               color: '#000000',
               borderRadius: '30px',
@@ -99,16 +94,16 @@ const ConnectWallet = () => {
             disabled={isSuccess}
           >
             <Typography variant="h6">
-              {isConnected ? (isSuccess ? 'Paid' : 'Pay') : 'Choose wallet'}
+              {isConnected ? (isSuccess ? 'Paid' : `Pay with ${Math.floor(totalRounded)} USDT`) : 'Choose wallet'}
             </Typography>
           </Button>
         </Grid>
         <Grid item md={8}>
-          {isConnected && (
+          {/* {isConnected && (
             <Typography variant="body1">
               Connected to {ensName ?? address}
             </Typography>
-          )}
+          )} */}
         </Grid>
       </Grid>
       {isSuccess && (
@@ -122,6 +117,14 @@ const ConnectWallet = () => {
           }}
         />
       )}
+      <Box flexGrow={15} mx={2} my={2}></Box>
+
+      <div style={{ textAlign: 'center' }}>
+        <Typography variant="h5">Or pay with QR</Typography>
+        <Box flexGrow={15} mx={2} my={2}></Box>
+        <img src="/image/qr.png" alt="" width="250px" height="250px" />
+      </div>
+      <Box flexGrow={15} mx={2} my={2}></Box>
     </>
   );
 };

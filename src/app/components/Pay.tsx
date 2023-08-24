@@ -9,6 +9,7 @@ const ChooseToken = ({ chain, handleClick }) => {
   const [openSwapToken, setOpenSwapToken] = useState<boolean>(false);
 
   const handleOpenSwapToken = () => {
+    handleClick()
     setOpenSwapToken(true);
   };
 
@@ -47,15 +48,21 @@ const ChooseToken = ({ chain, handleClick }) => {
 };
 
 export const Item = ({ imgPath, handleClick, clicked }) => {
+  const [isClicked, setIsClicked] = useState(false);
+
+  const clickItem = () => {
+    setIsClicked(!isClicked);
+    handleClick();
+  };
   return (
     <Grid item xs={12} sm={4} md={2}>
       <Button
         variant="outlined"
-        onClick={handleClick}
+        onClick={clickItem}
         sx={{
           display: 'flex',
           alignItems: 'center',
-          backgroundColor: '#ffffff',
+          backgroundColor: isClicked ? '#f7d7ba' : '#ffffff',
           borderRadius: '30px',
           width: '100px',
           '&:hover': {
@@ -89,13 +96,15 @@ const Pay = ({ billInfo }) => {
   const [openChooseToken, setOpenChooseToken] = useState(false);
   const [openConnectWallet, setOpenConnectWallet] = useState(false);
   const [atChain, setAtChain] = useState<number>(1);
+  const [token, setToken] = useState<string>('');
 
   const handleOpenChooseToken = index => {
     setAtChain(index);
     // console.log(atChain);
     setOpenChooseToken(true); // Toggle visibility
   };
-  const handleOpenConnectWallet = () => {
+  const handleOpenConnectWallet = tokenName => {
+    setToken(tokenName);
     setOpenConnectWallet(true); // Toggle visibility
   };
   return (

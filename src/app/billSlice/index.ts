@@ -11,7 +11,7 @@ export const initialState: BillState = {
   loading: false,
   billData: {
     name: 'Lala Land',
-    email: ' @gmail.com',
+    email: 'myemail@gmail.com',
     number: '0987654321',
     shopId: '123',
     shopName: 'BestStyle Shop',

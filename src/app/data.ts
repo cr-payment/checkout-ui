@@ -1,23 +1,5 @@
 export const chainData = [
-  {
-    name: 'BSC',
-    clicked: false,
-    tokens: [
-      {
-        name: 'BNB',
-        clicked: false,
-      },
-      {
-        name: 'BUSD',
-        clicked: false,
-      },
-
-      {
-        name: 'BTC',
-        clicked: false,
-      },
-    ],
-  },
+  
   {
     name: 'Ethereum',
     clicked: false,
@@ -48,6 +30,24 @@ export const chainData = [
         name: 'DAI',
         clicked: false,
       },
+      {
+        name: 'LINK',
+        clicked: false,
+      },
+      {
+        name: 'USDT',
+        clicked: false,
+      },
+    ],
+  },{
+    name: 'Polkadot',
+    clicked: false,
+    tokens: [
+      {
+        name: 'DOT',
+        clicked: false,
+      },
+
       {
         name: 'LINK',
         clicked: false,
