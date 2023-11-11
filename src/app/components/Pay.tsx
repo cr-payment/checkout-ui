@@ -3,7 +3,9 @@ import { InfoLine } from './Bill';
 import { useState } from 'react';
 import ConnectWallet from './ConnectWallet';
 import { chainData as chains } from '../data';
-
+import { useWallet } from "@suiet/wallet-kit";
+import { useWalletHelper } from "contexts/WalletHelperContext";
+import { ButtonSui } from './ButtonSui';
 const ChooseToken = ({ chain, handleClick }) => (
   <>
     <Box flexGrow={15} borderBottom="1px solid #ccc" my={4}></Box>
@@ -68,12 +70,23 @@ const Chains = ({ chains, handleClick }) => {
   );
 };
 
-const Pay = ({ billInfo }) => {
+const Pay = ({ billInfo, onBoostClick }) => {
   const [openChooseToken, setOpenChooseToken] = useState(false);
   const [openConnectWallet, setOpenConnectWallet] = useState(false);
   const [atChain, setAtChain] = useState<number>(1);
   const [token, setToken] = useState<string>('');
-
+  const { adapter } = useWallet();
+  const { lpBalances, fungibleBalances, setOpenSelectWallet } = useWalletHelper();
+  const handleStakeClick = (): void => {
+    // if (!farm || !amount || !amount.greaterThan(0)) {
+    //   return;
+    // }
+    const amount = 0;
+    const farm = 0;
+    const isLock = 0;
+    const lockPeriod = 1;
+    onBoostClick(amount, farm, isLock ? lockPeriod : 0);
+  };
   const handleOpenChooseToken = index => {
     setAtChain(index);
     // console.log(atChain);
@@ -86,6 +99,26 @@ const Pay = ({ billInfo }) => {
   return (
     <div>
       <Typography variant="h5">Supported chains</Typography>
+      <div>
+        {!adapter ? (
+          <ButtonSui
+            className="px-6 py-3 w-full text-xl font-Poppins whitespace-pre-wrap"
+            onClick={(): void => setOpenSelectWallet(true)}
+          >
+            Connect Wallet
+          </ButtonSui>
+        )
+          :
+          (
+            <ButtonSui
+              className="px-6 py-3 w-full text-xl font-Poppins whitespace-pre-wrap"
+              // disabled={Boolean(errorMsg)}
+              // isLoading={isLoading}
+              onClick={handleStakeClick}
+            >
+            </ButtonSui>
+        )}
+      </div>
       <Box flexGrow={15} mx={2} my={2}></Box>
 
       <Chains chains={chains} handleClick={handleOpenChooseToken} />
@@ -96,7 +129,7 @@ const Pay = ({ billInfo }) => {
           handleClick={handleOpenConnectWallet}
         />
       )}
-      {openChooseToken && <>{openConnectWallet && <ConnectWallet  />}</>}
+      {openChooseToken && <>{openConnectWallet && <ConnectWallet />}</>}
     </div>
   );
 };
