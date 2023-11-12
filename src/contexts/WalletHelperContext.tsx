@@ -44,7 +44,7 @@ export function WalletHelperContext({ children }: Props): ReactElement {
 
   const [isLoading, setIsLoading] = useState(false);
   const [openSelectWallet, setOpenSelectWallet] = useState(false);
-
+  console.log("here",openSelectWallet);
   const signAndExecuteTransaction = useCallback(
     async (tx: TransactionBlock) => {
       if (!tx || isLoading) {

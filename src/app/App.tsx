@@ -25,7 +25,11 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useBillSlice } from './billSlice';
 import { selectBillData } from './billSlice/selectors';
-
+import { WalletHelperContext } from 'contexts/WalletHelperContext';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import { WalletProvider } from '@suiet/wallet-kit';
+import { domAnimation, LazyMotion } from "framer-motion";
+const queryClient = new QueryClient()
 const apiKey = process.env.REACT_APP_ALCHEMY_APIKEY!;
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
@@ -67,7 +71,7 @@ export function App() {
 
     // Read the 'param' query parameter from the URL
     const sessId = getQueryParam('session_id');
-    const jsonDataURI= getQueryParam('json_data');
+    const jsonDataURI = getQueryParam('json_data');
     console.log(jsonDataURI)
     const jsonData = JSON.parse(decodeURIComponent(jsonDataURI!));
     console.log(jsonData)
@@ -104,51 +108,59 @@ export function App() {
   };
 
   return (
-    <WagmiConfig config={config}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Box
-          sx={{
-            height: 100,
-          }}
-        />
-
-        {!showComponent && (
-          <>
-            <Box
-              sx={{
-                height: 100,
-              }}
-            />
-            <Grid container spacing={8}>
-              <Grid item xs={5}></Grid>
-              <Grid item xs={7}>
-                <Button
-                  onClick={handleButtonClick}
+    <QueryClientProvider client={queryClient}>
+      <WalletProvider>
+        <LazyMotion features={domAnimation} strict>
+          <WalletHelperContext>
+            <WagmiConfig config={config}>
+              <ThemeProvider theme={theme}>
+                <GlobalStyle />
+                <Box
                   sx={{
                     height: 100,
-                    width: 300,
-                    backgroundColor: '#FAC898',
-                    color: '#000000',
                   }}
-                >
-                  Continue to CrPayment
-                </Button>
-              </Grid>
-            </Grid>
-          </>
-        )}
+                />
 
-        {showComponent && (
-          <Grid container spacing={8}>
-            <Grid item xs={1}></Grid>
-            <Grid item xs={10}>
-              <Bill />
-            </Grid>
-            <Grid item xs={1}></Grid>
-          </Grid>
-        )}
-      </ThemeProvider>
-    </WagmiConfig>
+                {!showComponent && (
+                  <>
+                    <Box
+                      sx={{
+                        height: 100,
+                      }}
+                    />
+                    <Grid container spacing={8}>
+                      <Grid item xs={5}></Grid>
+                      <Grid item xs={7}>
+                        <Button
+                          onClick={handleButtonClick}
+                          sx={{
+                            height: 100,
+                            width: 300,
+                            backgroundColor: '#FAC898',
+                            color: '#000000',
+                          }}
+                        >
+                          Continue to CrPayment
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  </>
+                )}
+
+                {showComponent && (
+                  <Grid container spacing={8}>
+                    <Grid item xs={1}></Grid>
+                    <Grid item xs={10}>
+                      <Bill />
+                    </Grid>
+                    <Grid item xs={1}></Grid>
+                  </Grid>
+                )}
+              </ThemeProvider>
+            </WagmiConfig>
+          </WalletHelperContext>
+        </LazyMotion>
+      </WalletProvider>
+    </QueryClientProvider >
   );
 }

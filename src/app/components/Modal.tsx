@@ -24,6 +24,7 @@ export function Modal({
   className,
   preventBackdropClick = false,
 }: Props): ReactElement {
+  console.log("model")
   return (
     <AnimatePresence mode="wait">
       {isOpen ? (

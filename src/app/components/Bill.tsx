@@ -70,7 +70,9 @@ export default function Bill() {
   //   load billInfo? from state
   const { actions } = useBillSlice();
   const billInfo = useSelector(selectBillData);
-
+  const onBoostClick = () => {
+    console.log(1)
+  }
   return (
     <div>
       <Grid container spacing={10}>
@@ -96,7 +98,7 @@ export default function Bill() {
           <InfoLine label="Email" value={billInfo?.email} />
           <InfoLine label="Number" value={billInfo?.number} />
           <Box flexGrow={15} borderBottom="1px solid #ccc" my={4}></Box>
-          <Pay billInfo={billInfo} />
+          <Pay billInfo={billInfo} onBoostClick={onBoostClick} />
         </Grid>
       </Grid>
     </div>

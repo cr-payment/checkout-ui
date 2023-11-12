@@ -66,9 +66,10 @@ function comperator(a: IWallet, b: IWallet): number {
 
 export function SelectWalletModal({ isOpen, onClose }: Props): ReactElement {
   const suietWallets = useWallet();
-
+  console.log(123, suietWallets)
   const handleSelectWallet = (name: string): void => {
     suietWallets.select(name);
+    console.log(123)
     onClose();
   };
 
@@ -79,7 +80,7 @@ export function SelectWalletModal({ isOpen, onClose }: Props): ReactElement {
     unInstalled.sort(comperator);
     return [...installed, ...unInstalled];
   }, [suietWallets.configuredWallets]);
-
+  console.log(configuredWallets, isOpen)
   return (
     <Modal isOpen={isOpen} title="Select Wallet" onClose={onClose}>
       <div className="space-y-0.5">

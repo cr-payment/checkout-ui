@@ -80,7 +80,7 @@ const Pay = ({ billInfo, onBoostClick }) => {
   const handleStakeClick = (): void => {
     // if (!farm || !amount || !amount.greaterThan(0)) {
     //   return;
-    // }
+    // }  
     const amount = 0;
     const farm = 0;
     const isLock = 0;
@@ -103,9 +103,12 @@ const Pay = ({ billInfo, onBoostClick }) => {
         {!adapter ? (
           <ButtonSui
             className="px-6 py-3 w-full text-xl font-Poppins whitespace-pre-wrap"
-            onClick={(): void => setOpenSelectWallet(true)}
+            onClick={
+              (): void => {
+                console.log(1);
+                setOpenSelectWallet(true)}}
           >
-            Connect Wallet
+            Connect Wallets
           </ButtonSui>
         )
           :
@@ -121,15 +124,15 @@ const Pay = ({ billInfo, onBoostClick }) => {
       </div>
       <Box flexGrow={15} mx={2} my={2}></Box>
 
-      <Chains chains={chains} handleClick={handleOpenChooseToken} />
+      {/* <Chains chains={chains} handleClick={handleOpenChooseToken} /> */}
 
-      {openChooseToken && (
+      {/* {openChooseToken && (
         <ChooseToken
           chain={chains[atChain]}
           handleClick={handleOpenConnectWallet}
         />
       )}
-      {openChooseToken && <>{openConnectWallet && <ConnectWallet />}</>}
+      {openChooseToken && <>{openConnectWallet && <ConnectWallet />}</>} */}
     </div>
   );
 };
