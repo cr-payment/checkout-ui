@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import { selectBillData } from 'app/billSlice/selectors';
 import { Item } from './Pay';
 import AlertDialog from './AlertDialog';
+import { ConnectButton } from '@mysten/wallet-kit';
 
 function Profile() {
   const { address, isConnected } = useAccount();
@@ -76,36 +77,12 @@ const ConnectWallet = () => {
   return (
     <>
       <Box flexGrow={15} borderBottom="1px solid #ccc" my={4}></Box>
-      <Typography variant="h5">Connect your wallet</Typography>
-      <Box flexGrow={15} mx={2} my={2}></Box>
-      <Wallets handleClick={connect} />
-      <Box flexGrow={15} mx={2} my={2}></Box>
-      <Grid container spacing={40}>
-        <Grid item md={1}>
-          <Button
-            sx={{
-              height: 60,
-              width: 250,
-              backgroundColor: '#FAC898',
-              color: '#000000',
-              borderRadius: '30px',
-            }}
-            onClick={() => write?.()}
-            disabled={isSuccess}
-          >
-            <Typography variant="h6">
-              {isConnected ? (isSuccess ? 'Paid' : `Pay with ${Math.floor(totalRounded)} USDT`) : 'Choose wallet'}
-            </Typography>
-          </Button>
-        </Grid>
-        <Grid item md={8}>
-          {/* {isConnected && (
-            <Typography variant="body1">
-              Connected to {ensName ?? address}
-            </Typography>
-          )} */}
-        </Grid>
-      </Grid>
+      <Typography mt={2} variant="h5">Connect your wallet:</Typography>
+      <ConnectButton>
+        <Typography variant="h6">
+          {isConnected ? (isSuccess ? 'Paid' : `Pay with ${Math.floor(totalRounded)} USDT`) : 'Choose wallet'}
+        </Typography>
+      </ConnectButton>
       {isSuccess && (
         <AlertDialog
           text={`Transaction successful ${JSON.stringify(

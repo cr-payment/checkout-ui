@@ -24,9 +24,9 @@ export const ImageAndText = ({ imgPath, label, value }) => {
   return (
     <Box display="flex" alignItems="center">
       <div style={{ display: 'flex', alignItems: 'center' }}>
-  <img src={imgPath} width="50px" height="50px" style={{ marginRight: '50px' }} />
-  <Typography variant="body1">{label}</Typography>
-</div>
+        <img src={imgPath} width="50px" height="50px" style={{ marginRight: '50px' }} />
+        <Typography variant="body1">{label}</Typography>
+      </div>
       <Box flexGrow={1} mx={2}></Box>
       <Typography variant="body1" style={{ fontWeight: 'bold' }}>
         {`$ ${value}`}
@@ -37,11 +37,11 @@ export const ImageAndText = ({ imgPath, label, value }) => {
 const Cart = ({ billInfo }) => {
   return (
     <div>
-      {billInfo?.cart.map((bill: { name: string; price: number, img:string }, index) => (
-        <>        
-              <Box flexGrow={15} mx={2} my={2}></Box>
+      {billInfo?.cart.map((bill: { name: string; price: number, img: string }, index) => (
+        <>
+          <Box flexGrow={15} mx={2} my={2}></Box>
 
-        <ImageAndText key={index} imgPath={bill.img}label={bill.name} value={bill.price} />
+          <ImageAndText key={index} imgPath={bill.img} label={bill.name} value={bill.price} />
 
         </>
       ))}
@@ -95,7 +95,6 @@ export default function Bill() {
           <InfoLine label="Name" value={billInfo?.name} />
           <InfoLine label="Email" value={billInfo?.email} />
           <InfoLine label="Number" value={billInfo?.number} />
-          <Box flexGrow={15} borderBottom="1px solid #ccc" my={4}></Box>
           <Pay billInfo={billInfo} />
         </Grid>
       </Grid>

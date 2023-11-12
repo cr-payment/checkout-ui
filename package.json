@@ -7,6 +7,8 @@
     "@emotion/styled": "11.11.0",
     "@ethersproject/units": "5.7.0",
     "@mui/material": "5.14.5",
+    "@mysten/sui.js": "0.45.1",
+    "@mysten/wallet-kit": "0.8.2",
     "@reduxjs/toolkit": "1.8.5",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",

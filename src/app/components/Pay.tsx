@@ -69,7 +69,7 @@ const Chains = ({ chains, handleClick }) => {
 };
 
 const Pay = ({ billInfo }) => {
-  const [openChooseToken, setOpenChooseToken] = useState(false);
+  const [openChooseToken, setOpenChooseToken] = useState(true);
   const [openConnectWallet, setOpenConnectWallet] = useState(false);
   const [atChain, setAtChain] = useState<number>(1);
   const [token, setToken] = useState<string>('');
@@ -85,18 +85,7 @@ const Pay = ({ billInfo }) => {
   };
   return (
     <div>
-      <Typography variant="h5">Supported chains</Typography>
-      <Box flexGrow={15} mx={2} my={2}></Box>
-
-      <Chains chains={chains} handleClick={handleOpenChooseToken} />
-
-      {openChooseToken && (
-        <ChooseToken
-          chain={chains[atChain]}
-          handleClick={handleOpenConnectWallet}
-        />
-      )}
-      {openChooseToken && <>{openConnectWallet && <ConnectWallet  />}</>}
+      {<ConnectWallet />}
     </div>
   );
 };

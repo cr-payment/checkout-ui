@@ -26,6 +26,8 @@ import { ThemeProvider } from 'styles/theme/ThemeProvider';
 
 import reportWebVitals from 'reportWebVitals';
 
+import { WalletKitProvider } from '@mysten/wallet-kit';
+
 // Initialize languages
 import './locales/i18n';
 
@@ -44,15 +46,17 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <Provider store={store}>
-    <ThemeProvider>
-      <HelmetProvider>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      </HelmetProvider>
-    </ThemeProvider>
-  </Provider>,
+  <WalletKitProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <HelmetProvider>
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        </HelmetProvider>
+      </ThemeProvider>
+    </Provider>
+  </WalletKitProvider>,
 );
 
 // Hot reloadable translation json files
