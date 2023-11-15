@@ -95,13 +95,6 @@ const ConnectWallet = () => {
         />
       )}
       <Box flexGrow={15} mx={2} my={2}></Box>
-
-      <div style={{ textAlign: 'center' }}>
-        <Typography variant="h5">Or pay with QR</Typography>
-        <Box flexGrow={15} mx={2} my={2}></Box>
-        <img src="/image/qr.png" alt="" width="250px" height="250px" />
-      </div>
-      <Box flexGrow={15} mx={2} my={2}></Box>
     </>
   );
 };
