@@ -15,7 +15,8 @@ export interface BillState {
 export interface BillData {
   name?: string;
   email?: string;
-  number?: string;
+  phoneNumber?: string;
+  countryCode?: string;
   shopId?: string;
   shopName?: string;
   cart: Merch[];

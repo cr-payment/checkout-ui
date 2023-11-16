@@ -20,10 +20,11 @@ export const InfoLine = ({ label, value }) => {
   );
 };
 
-export const ImageAndText = ({ imgPath, label, value }) => {
+export const ImageAndText = ({quantity, imgPath, label, value }) => {
   return (
     <Box display="flex" alignItems="center">
       <div style={{ display: 'flex', alignItems: 'center' }}>
+        <p>{quantity} x </p>
         <img src={imgPath} width="50px" height="50px" style={{ marginRight: '50px' }} />
         <Typography variant="body1">{label}</Typography>
       </div>
@@ -35,13 +36,14 @@ export const ImageAndText = ({ imgPath, label, value }) => {
   );
 };
 const Cart = ({ billInfo }) => {
+  console.log(123, billInfo)
   return (
     <div>
-      {billInfo?.cart.map((bill: { name: string; price: number, img: string }, index) => (
+      {billInfo?.cart.map((bill: { name: string; price: number, img: string, quantity: number }, index) => (
         <>
           <Box flexGrow={15} mx={2} my={2}></Box>
 
-          <ImageAndText key={index} imgPath={bill.img} label={bill.name} value={bill.price} />
+          <ImageAndText key={index} imgPath={bill.img} label={bill.name} value={bill.price} quantity={bill.quantity} />
 
         </>
       ))}
@@ -70,7 +72,9 @@ export default function Bill() {
   //   load billInfo? from state
   const { actions } = useBillSlice();
   const billInfo = useSelector(selectBillData);
-
+  console.log(111, billInfo)
+  const fullPhoneNumber = (billInfo?.countryCode ? billInfo?.countryCode : "") + " " + billInfo?.phoneNumber
+  // if(bill)
   return (
     <div>
       <Grid container spacing={10}>
@@ -94,7 +98,7 @@ export default function Bill() {
           <Typography variant="h5">Billing Information</Typography>
           <InfoLine label="Name" value={billInfo?.name} />
           <InfoLine label="Email" value={billInfo?.email} />
-          <InfoLine label="Number" value={billInfo?.number} />
+          <InfoLine label="Number" value={fullPhoneNumber} />
           <Pay billInfo={billInfo} />
         </Grid>
       </Grid>
